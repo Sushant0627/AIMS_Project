@@ -6,15 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Database</title>
 
-    <header>
-        <a href="{{ route('seed.index') }}">Seed Data</a>
-        <a href="{{ route('livestock.index') }}">Livestock Data</a>
-        <a href="{{ route('weather.index') }}">Weather Data</a>
-        <a href="{{ route('equipment.index') }}">Equipment Data</a>
-        <a href="{{ route('crop.index') }}">Crops Data</a>
-        <a href="">Farmer Data</a>
-        <a href="empData">Employee Data</a>
-    </header>
+    <div>
+
+    </div>
+    <div>
+        <header>
+            <a href="{{ route('seed.index') }}">Seed Data</a>
+            <a href="{{ route('livestock.index') }}">Livestock Data</a>
+            <a href="{{ route('weather.index') }}">Weather Data</a>
+            <a href="{{ route('equipment.index') }}">Equipment Data</a>
+            <a href="{{ route('crop.index') }}">Crops Data</a>
+            <a href="">Farmer Data</a>
+            <a href="empData">Employee Data</a>
+        </header>
+    </div>
 </head>
 <body>
 

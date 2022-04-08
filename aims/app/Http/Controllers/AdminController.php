@@ -7,6 +7,10 @@ use App\Models\admin_user;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller{
+    function img(){
+
+    }
+
     function getLogin(){
         if(session('id')){
             return redirect('adminDash');
@@ -18,7 +22,7 @@ class AdminController extends Controller{
         if(session('id')){
             return view('admin/dashboard');
         }
-        return redirect('admin/login');
+        return redirect('admin');
     }
 
     function UserAuth(UserAuth $request){

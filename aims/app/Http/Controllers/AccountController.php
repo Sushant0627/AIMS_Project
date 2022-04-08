@@ -76,9 +76,16 @@ class AccountController extends Controller
      */
     public function update(Request $request)
     {
+        // dd($request);
+
         $query = admin_user::find(session('id'));
 
         if($request['which']=='email'){
+
+            $validated = $request->validate([
+                'nEmail'=>'required',
+                'passphrase'=>'required',
+            ]);
 
             $query->email = $request['nEmail'];
 
@@ -86,24 +93,29 @@ class AccountController extends Controller
 
             return redirect(route('asc.index'));
         }
-        else if ($request['which']=='passphrase') {
+        else if ($request['which']=='password') {
+            $validated = $request->validate([
+                'oldPassword'=>'required',
+                'newPassword'=>'required',
+                'rePassword'=>'required',
+            ]);
 
-            if ($query['passphrase']==$request['oldPassphrase']){
-                if($request['newPassword']!=$request['rePassword']){
+            if ($query['passphrase'] == $request['oldPassword']){
+                if($request['newPassword']==$request['rePassword']){
 
-                    return "Please Enter Same Password";
-
-                } else {
                     $query->passphrase = $request['newPassword'];
 
                     $query->save();
 
                     return redirect(route('asc.index'));
+                } else {
+
+                    return view('admin\settings\editSettings', ['which'=>'password','msg'=>'Please Enter the Same Password']);
                 }
             }
             else {
-                return "Wrong Password";
-                // return view('admin\settings\editSettings', ['msg'=>'Wrong Password']);
+
+                return view('admin\settings\editSettings', ['which'=>'password','message'=>'Wrong Password']);
             }
         }
     }

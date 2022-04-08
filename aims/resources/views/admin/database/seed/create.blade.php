@@ -3,11 +3,14 @@
 @section('title', 'Add Seed Data')
 
 @section('content')
-<form action="{{ route('seed.store') }}" method="post">
+<form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post">
     @csrf
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name">
-
-    <button type="submit">Submit</button>
+    {!! Form::label('name', 'Name: ') !!}
+    {!! Form::text('name', NULL ,array('placeholder'=>'Crop Name')) !!}
+    <br>
+    {!! Form::label('picture', 'Image: ') !!}
+    {!! Form::file('picture') !!}
+    <br>
+    {!! Form::submit("Submit") !!}
 </form>
 @endsection

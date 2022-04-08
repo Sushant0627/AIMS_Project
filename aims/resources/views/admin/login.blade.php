@@ -6,11 +6,19 @@
 
 <div>
     <div>
+        <div>
+            <p>
+                <b>
+                    Sign In
+                </b>
+            </p>
+        </div>
         <form action="Auth" method="POST">
             @csrf
             <div>
-                <label for="employeeID">Employee ID</label>
-                <input maxlength=7 placeholder="Employee ID" value="{{ old('employeeID') }}" type="text" name="id" id="id">
+                {!! Form::label('employeeID', 'Employee ID:') !!}
+                {!! Form::text('id', old('Employee ID'), array('placeholder'=>'Enter Your Employee ID', 'maxlength'=>7)) !!}
+
                 @error('id')
                     <div class="error-msg">
                         {{$message}}
@@ -18,12 +26,11 @@
                 @enderror
             </div>
             <div>
-                <label for="passphrase">Password</label>
-                <input placeholder="Password" type="password" name="passphrase" id="passphrase">
+                {!! Form::label('passphrase', 'Password: ') !!}
+                {!! Form::password('passphrase', array('placeholder'=>'Enter Your Password')) !!}
+                <br>
                 @if (isset($msg))
                     {{"Wrong Password"}}
-                @else
-                    {{$msg=NULL}}
                 @endif
                 @error('passphrase')
                     <div class="error-msg">
@@ -33,7 +40,7 @@
             </div>
             <a href="passReset">Forgot Your Password?</a>
             <div>
-                <button type="submit">Login</button>
+                {!! Form::submit('Login') !!}
             </div>
         </form>
     </div>

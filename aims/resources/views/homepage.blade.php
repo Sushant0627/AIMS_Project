@@ -9,11 +9,11 @@
         </div>
 
         <div class="aLinks">
+            <a href="#">Home</a>
             <a href="#"></a>
             <a href="#"></a>
             <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+            <a href="#">Knowledge Area</a>
             <a href="#"></a>
         </div>
 

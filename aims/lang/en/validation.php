@@ -145,6 +145,16 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'id' => [
+            'required' => 'Please Enter Your Employee ID',
+            'max'=>'Enter your 7 digit Employee ID',
+        ],
+        'passphrase' => [
+            'required' => 'Please Enter Your Password'
+        ],
+        'rePassword' => [
+            'required' => 'Re-type the new password.'
+        ]
     ],
 
     /*
@@ -158,6 +168,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'nEmail'=>'new email',
+        'newPassword'=>'new password',
+        'rePassword'=>'password',
+        'oldPassword'=>'old password',
+    ],
 
 ];

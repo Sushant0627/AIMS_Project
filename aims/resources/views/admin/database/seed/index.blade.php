@@ -8,12 +8,14 @@
         <tr>
             <td>ID</td>
             <td>Name</td>
+            <td>Image</td>
             <td>Operation</td>
         </tr>
         @foreach ($datas as $data)
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$data['name']}}</td>
+            <td><img src="{{asset($data['imgPath'])}}"></td>
             <td><a href="{{ 'sDelete/'.$data['id'] }}">Delete</a> |
                 <a href="{{ 'sEdit/'.$data['id'] }}">Edit</a></td>
         </tr>

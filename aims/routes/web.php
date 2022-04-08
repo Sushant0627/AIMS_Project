@@ -23,8 +23,9 @@ use Illuminate\Support\Facades\Route;
 // admin view
 Route::view('/', 'homepage');
 Route::view('database', 'layouts/databaseLayout');
-Route::view('admin', 'admin/login');
+Route::view('admin', 'admin/login')->name('admin');
 Route::view('passReset', 'admin/passReset');
+Route::view('adminAcctSett', 'admin\settings\editSettings')->name('adminAcctSett');
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('logout', 'getLogout');

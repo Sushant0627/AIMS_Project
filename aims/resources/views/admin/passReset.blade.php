@@ -1,18 +1,27 @@
 @extends('admin/login')
 
 @section('content')
+<div>
+    <p>
+        <b>
+            Reset Your Password
+        </b>
+    </p>
+</div>
 
-<form action="" method="post">
-    <label for="eid">Employee ID: </label>
-    <input type="text" placeholder="Enter Your Employee ID" name="eid" id="eid">
+<div>
+    <form action="" method="post">
+        {!! Form::label('eid', 'Employee ID: ') !!}
+        {!! Form::text('eid', old('eid'), array('placeholder'=>'Enter Your Employee ID')) !!}
 
-    <br>
+        <br>
 
-    <button type="submit">Submit</button>
+        {!! Form::submit('Submit') !!}
 
-    <br>
+        <br>
 
-    <a href="admin">Want To Try Login Again?</a>
-</form>
+        <a href="admin">Want To Try Login Again?</a>
+    </form>
+</div>
 
 @endsection

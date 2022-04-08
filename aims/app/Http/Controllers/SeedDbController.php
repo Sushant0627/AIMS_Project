@@ -40,9 +40,16 @@ class SeedDbController extends Controller
      */
     public function store(Request $request)
     {
+        $imgName = $request->file('picture')->getClientOriginalName();
+        $imgPath = $request->file('picture')->store('images');;
+
+        dd($imgPath);
+
         $sData = new seed_data();
 
         $sData->name = $request->name;
+        $sData->imgName = $imgName;
+        $sData->imgPath = $imgPath;
 
         $sData->save();
 
