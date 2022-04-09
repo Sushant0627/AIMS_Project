@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\seed_data;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class SeedDbController extends Controller
 {
@@ -40,20 +39,30 @@ class SeedDbController extends Controller
      */
     public function store(Request $request)
     {
-        $imgName = $request->file('picture')->getClientOriginalName();
-        $imgPath = $request->file('picture')->store('images');;
+        $validated = $request->validate([
+            'name' => ['required', 'min:3'],
+            'growth'=>['integer'],
+        ]);
 
-        dd($imgPath);
+        $data = $request->merge([
+            'crop'=>strip_tags($request['crop']),
+            'growth'=>strip_tags($request['growth']),
+        ]);
 
-        $sData = new seed_data();
+        $query = seed_data::where('name', $data['name'])->exists();
 
-        $sData->name = $request->name;
-        $sData->imgName = $imgName;
-        $sData->imgPath = $imgPath;
+        if($query){
+            return redirect()->route('seed.create')->with('failed', 'Seed Already In Database');
+        } else {
+            $sData = new seed_data();
 
-        $sData->save();
+            $sData->name = $data->name;
+            $sData->growth = $data->growth;
 
-        return redirect()->route('seed.index');
+            $sData->save();
+
+            return redirect()->route('seed.index')->with('success', 'Seed Successfully Added');
+        }
     }
 
     /**
@@ -88,15 +97,24 @@ class SeedDbController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'min:3'],
+            'growth'=>['integer'],
+        ]);
+
+        $data = $request->merge([
+            'crop'=>strip_tags($request['crop']),
+            'growth'=>strip_tags($request['growth']),
+        ]);
+
         $sData = seed_data::find($id);
 
-        $sData->name = $request->name;
+        $sData->name = $data->name;
+        $sData->growth = $data->growth;
 
         $sData->save();
 
-        return redirect()->route('seed.index');
-
-        // return $request->Input();
+        return redirect()->route('seed.index')->with('success', 'Seed Updated In Database');
     }
 
     /**
@@ -111,6 +129,6 @@ class SeedDbController extends Controller
 
         $data->delete();
 
-        return redirect(route('seed.index'));
+        return redirect()->route('seed.index')->with('success', 'Record Deleted From Database');
     }
 }

@@ -142,15 +142,17 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        // 'attribute-name' => [
+        //     'rule-name' => 'custom-message',
+        // ],
         'id' => [
-            'required' => 'Please Enter Your Employee ID',
+            'required' => 'Please enter Your Employee ID',
             'max'=>'Enter your 7 digit Employee ID',
+            'integer' => 'Please enter your 7 digit employee ID'
         ],
-        'passphrase' => [
-            'required' => 'Please Enter Your Password'
+        'password' => [
+            'required' => 'Please enter Your Password',
+            'min' => 'Password must be at least 5 letter'
         ],
         'rePassword' => [
             'required' => 'Re-type the new password.'

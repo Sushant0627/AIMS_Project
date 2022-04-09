@@ -40,24 +40,30 @@ class EquipDbController extends Controller
      */
     public function store(Request $request)
     {
-        $sData = new equipment_data();
+        $validated = $request->validate([
+            'name' => ['required', 'min:3'],
+        ]);
 
-        $sData->name = $request->name;
+        $data = $request->merge([
+            'name'=>strip_tags($request['name']),
+            'mrp'=>strip_tags($request['mrp']),
+        ]);
 
-        $sData->save();
+        $query = equipment_data::where('name', $data['name'])->exists();
 
-        return redirect()->route('equipment.index');
-    }
+        if($query){
+            return redirect()->route('equipment.create')->with('failed', 'Equipment Already In Database');
+        } else {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            $sData = new equipment_data();
+
+            $sData->name = $request->name;
+            $sData->mrp = $request->mrp;
+
+            $sData->save();
+
+            return redirect()->route('equipment.index')->with('success', 'Equipment Added To Database');
+        }
     }
 
     /**
@@ -69,6 +75,7 @@ class EquipDbController extends Controller
     public function edit($id)
     {
         $data = equipment_data::find($id);
+
         return view('admin/database/equipment/edit', ['data'=>$data]);
     }
 
@@ -81,15 +88,18 @@ class EquipDbController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'min:3'],
+        ]);
+
         $sData = equipment_data::find($id);
 
-        $sData->name = $request->name;
+        $sData->name = $sData->name;
+        $sData->mrp = $sData->mrp;
 
         $sData->save();
 
-        return redirect()->route('equipment.index');
-
-        // return $request->Input();
+        return redirect()->route('equipment.index')->with('success', 'Equipment Updated In Database');
     }
 
     /**
@@ -104,6 +114,6 @@ class EquipDbController extends Controller
 
         $data->delete();
 
-        return redirect(route('equipment.index'));
+        return redirect()->route('equipment.index')->with('success', 'Equipment Deleted From Database');
     }
 }

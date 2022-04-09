@@ -8,7 +8,7 @@
         @yield('title')
     </title>
 
-    <link rel="stylesheet" href="{{ url('css/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap') }}">
 
     <header>
         <img src="A.png" height="50" width="50">
@@ -16,6 +16,7 @@
         <p>
             Agriculture Information Management System
         </p>
+
         <nav>
             <a href="">Home</a>
             <a href="">Data</a>
@@ -40,6 +41,7 @@
 
     @yield('content')
 
+    <script src="{{ asset('js/bootstrap') }}"></script>
 </body>
 
 <footer>

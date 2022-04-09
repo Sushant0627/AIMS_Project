@@ -4,7 +4,6 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EquipDbController;
 use App\Http\Controllers\LivestockDbController;
-use App\Http\Controllers\WeatherDbController;
 use App\Http\Controllers\CropDbController;
 use App\Http\Controllers\SeedDbController;
 use Illuminate\Support\Facades\Route;
@@ -21,18 +20,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 // admin view
-Route::view('/', 'homepage');
-Route::view('database', 'layouts/databaseLayout');
+Route::view('/', 'homepage')->name('home');
+Route::view('database', 'layouts/databaseLayout')->name('database');
 Route::view('admin', 'admin/login')->name('admin');
 Route::view('passReset', 'admin/passReset');
 Route::view('adminAcctSett', 'admin\settings\editSettings')->name('adminAcctSett');
+
+Route::fallback(function(){
+    return redirect('PageNotFound');
+});
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('logout', 'getLogout');
     Route::get('admin', 'getLogin');
     Route::post('Auth', 'UserAuth');
     Route::get('empData',  'adminDisplay');
-    Route::get('adminDash', 'getDashboard');
+    Route::get('adminDash', 'getDashboard')->name('dashboard');
 });
 
 //  Seed
@@ -68,15 +71,6 @@ Route::resource('livestock', LivestockDbController::class);
 Route::controller(LivestockDbController::class)->group(function () {
     Route::get('lDelete/{id}', 'destroy');
     Route::get('lEdit/{id}', 'edit');
-});
-
-
-//  Weather
-Route::resource('weather', WeatherDbController::class);
-
-Route::controller(WeatherDbController::class)->group(function () {
-    Route::get('wDelete/{id}', 'destroy');
-    Route::get('wEdit/{id}', 'edit');
 });
 
 Route::resource('asc', AccountController::class);

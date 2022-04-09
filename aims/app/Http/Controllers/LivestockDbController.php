@@ -40,24 +40,32 @@ class LivestockDbController extends Controller
      */
     public function store(Request $request)
     {
-        $sData = new livestock_data();
+        $validated = $request->validate([
+            'name' => ['required', 'min:3']
+        ]);
 
-        $sData->name = $request->name;
+        $data = $request->merge([
+            'name'=>strip_tags($request['name']),
+            'mrp'=>strip_tags($request['mrp']),
+            'frp'=>strip_tags($request['frp']),
+        ]);
 
-        $sData->save();
+        $query = livestock_data::where('name', $data['name'])->exists();
 
-        return redirect()->route('livestock.index');
-    }
+        if($query){
+            return redirect()->route('livestock.create')->with('failed', 'Livestock Already In Database');
+        } else {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            $sData = new livestock_data();
+
+            $sData->name = $data->name;
+            $sData->mrp = $data->mrp;
+            $sData->frp = $data->frp;
+
+            $sData->save();
+
+            return redirect()->route('livestock.index')->with('success', 'Livestock Successfully Added');
+        }
     }
 
     /**
@@ -81,13 +89,25 @@ class LivestockDbController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'min:3']
+        ]);
+
+        $data = $request->merge([
+            'name'=>strip_tags($request['name']),
+            'mrp'=>strip_tags($request['mrp']),
+            'frp'=>strip_tags($request['frp']),
+        ]);
+
         $sData = livestock_data::find($id);
 
-        $sData->name = $request->name;
+        $sData->name = $data->name;
+        $sData->mrp = $data->mrp;
+        $sData->frp = $data->frp;
 
         $sData->save();
 
-        return redirect()->route('livestock.index');
+        return redirect()->route('livestock.index')->with('success', 'Livestock Updated In Database');
 
         // return $request->Input();
     }
@@ -104,6 +124,6 @@ class LivestockDbController extends Controller
 
         $data->delete();
 
-        return redirect(route('livestock.index'));
+        return redirect()->route('livestock.index')->with('success', 'Livestock Deleted From Database');
     }
 }

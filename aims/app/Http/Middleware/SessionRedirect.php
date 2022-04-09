@@ -16,7 +16,5 @@ class SessionRedirect
      */
     public function handle(Request $request, Closure $next)
     {
-
-        return ;
     }
 }

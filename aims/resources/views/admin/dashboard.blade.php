@@ -28,11 +28,11 @@
 @section('content')
     <div>
         <div>
-            <a class="" href="/">View the Homepage</a>
+            <a class="" href="{{ route('home') }}">View the Homepage</a>
         </div>
 
         <div>
-            <a class="" href="database">View the database</a>
+            <a class="" href="{{ route('database') }}">View the database</a>
         </div>
 
         <div>

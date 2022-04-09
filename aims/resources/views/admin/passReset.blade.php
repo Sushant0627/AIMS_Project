@@ -11,12 +11,12 @@
 
 <div>
     <form action="" method="post">
-        {!! Form::label('eid', 'Employee ID: ') !!}
-        {!! Form::text('eid', old('eid'), array('placeholder'=>'Enter Your Employee ID')) !!}
+        <label for="eid">Employee ID: </label>
+        <input type="text" name="id" id="id" placeholder="Enter your Employee ID" value="{{ old('id') }}">
 
         <br>
 
-        {!! Form::submit('Submit') !!}
+        <button type="submit">Submit</button>
 
         <br>
 

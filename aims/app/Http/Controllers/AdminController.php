@@ -25,9 +25,19 @@ class AdminController extends Controller{
         return redirect('admin');
     }
 
-    function UserAuth(UserAuth $request){
+    function UserAuth(Request $request){
 
-        $query = admin_user::where('eid', $request['id'])->where('passphrase', $request['passphrase'])->first();
+        $validated = $request->validate([
+            'id' => 'required|integer|min:7',
+            'password' => 'required|min:5'
+        ]);
+
+        // $request->merge([
+        //     'id' => strip_tags($request['id']),
+        //     'password' => strip_tags($request['password']),
+        // ]);
+
+        $query = admin_user::where('eid', $request['id'])->where('passphrase', $request['password'])->first();
 
         if($query){
             $request->session()->put('id', $query['eid']);
@@ -36,7 +46,7 @@ class AdminController extends Controller{
 
             return redirect('adminDash');
         } else {
-            return view('admin/login', ['msg'=>'true']);
+            return redirect('admin')->with('status', 'Wrong Password');
         }
     }
 

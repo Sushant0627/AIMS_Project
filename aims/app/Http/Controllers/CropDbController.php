@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\crops_data;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class CropDbController extends Controller
 {
@@ -40,24 +39,36 @@ class CropDbController extends Controller
      */
     public function store(Request $request)
     {
-        $sData = new crops_data();
+        $validated = $request->validate([
+            'crop' => ['required', 'min:3']
+        ]);
 
-        $sData->name = $request->name;
+        $data = $request->merge([
+            'crop'=>strip_tags($request['crop']),
+            'municipality'=>strip_tags($request['municipality']),
+            'ward'=>strip_tags($request['ward']),
+            'mrp'=>strip_tags($request['mrp']),
+            'frp'=>strip_tags($request['frp']),
+        ]);
 
-        $sData->save();
+        $query = crops_data::where('name', $data['crop'])->exists();
 
-        return redirect()->route('crop.index');
-    }
+        if($query){
+            return redirect()->route('crop.create')->with('failed', 'Crop Already In Database');
+        } else {
+            $sData = new crops_data();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+            $sData->name = $data->crop;
+            $sData->province = $data->province;
+            $sData->municipality = $data->municipality;
+            $sData->ward = $data->ward;
+            $sData->mrp = $data->mrp;
+            $sData->frp = $data->frp;
+
+            $sData->save();
+
+            return redirect()->route('crop.index')->with('success', 'Crop Added Successfully');
+        }
     }
 
     /**
@@ -81,15 +92,32 @@ class CropDbController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
+
+        $validated = $request->validate([
+            'name' => ['required', 'min:3']
+        ]);
+
+        $data = $request->merge([
+            'crop'=>strip_tags($request['crop']),
+            'municipality'=>strip_tags($request['municipality']),
+            'ward'=>strip_tags($request['ward']),
+            'mrp'=>strip_tags($request['mrp']),
+            'frp'=>strip_tags($request['frp']),
+        ]);
+
         $sData = crops_data::find($id);
 
-        $sData->name = $request->name;
+        $sData->name = $data->crop;
+        $sData->province = $data->province;
+        $sData->municipality = $data->municipality;
+        $sData->ward = $data->ward;
+        $sData->mrp = $data->mrp;
+        $sData->frp = $data->frp;
 
         $sData->save();
 
-        return redirect()->route('crop.index');
-
-        // return $request->Input();
+        return redirect()->route('crop.index')->with('success', 'Crop Updated Successfully');
     }
 
     /**
@@ -104,6 +132,6 @@ class CropDbController extends Controller
 
         $data->delete();
 
-        return redirect(route('crop.index'));
+        return redirect()->route('crop.index')->with('success', 'Crop Deleted From Database');
     }
 }

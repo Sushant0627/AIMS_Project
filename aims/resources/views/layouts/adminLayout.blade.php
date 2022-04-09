@@ -8,14 +8,17 @@
         @yield('title')
     </title>
 
-    <link rel="stylesheet" href="{{ url('css/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     @yield('head')
+
 </head>
 <body>
 
     @yield('content')
 
+    <script src="{{ asset('js/bootstrap') }}"></script>
 </body>
 
 <footer>
