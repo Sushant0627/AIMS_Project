@@ -8,7 +8,7 @@
         @yield('title')
     </title>
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
     <header>
         <img src="A.png" height="50" width="50">
@@ -41,7 +41,7 @@
 
     @yield('content')
 
-    <script src="{{ asset('js/bootstrap') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 </body>
 
 <footer>

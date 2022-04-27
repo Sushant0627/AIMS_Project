@@ -92,8 +92,6 @@ class CropDbController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
-
         $validated = $request->validate([
             'name' => ['required', 'min:3']
         ]);
@@ -106,18 +104,24 @@ class CropDbController extends Controller
             'frp'=>strip_tags($request['frp']),
         ]);
 
-        $sData = crops_data::find($id);
+        $query = crops_data::where('name', $data['name'])->exists();
 
-        $sData->name = $data->crop;
-        $sData->province = $data->province;
-        $sData->municipality = $data->municipality;
-        $sData->ward = $data->ward;
-        $sData->mrp = $data->mrp;
-        $sData->frp = $data->frp;
+        if($query){
+            return back()->with('failed', 'Crop Already In Database');
+        } else {
+            $sData = crops_data::find($id);
 
-        $sData->save();
+            $sData->name = $data->name;
+            $sData->province = $data->province;
+            $sData->municipality = $data->municipality;
+            $sData->ward = $data->ward;
+            $sData->mrp = $data->mrp;
+            $sData->frp = $data->frp;
 
-        return redirect()->route('crop.index')->with('success', 'Crop Updated Successfully');
+            $sData->save();
+
+            return redirect()->route('crop.index')->with('success', 'Crop Updated Successfully');
+        }
     }
 
     /**

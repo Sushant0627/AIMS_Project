@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserAuth;
 use App\Models\admin_user;
 use Illuminate\Http\Request;
 
@@ -31,11 +30,6 @@ class AdminController extends Controller{
             'id' => 'required|integer|min:7',
             'password' => 'required|min:5'
         ]);
-
-        // $request->merge([
-        //     'id' => strip_tags($request['id']),
-        //     'password' => strip_tags($request['password']),
-        // ]);
 
         $query = admin_user::where('eid', $request['id'])->where('passphrase', $request['password'])->first();
 

@@ -3,7 +3,7 @@
 @section('title', 'Edit Equipment')
 
 @section('content')
-
+    <h1>Edit Equipment Data</h1>
     <form action="{{ route('equipment.update', $data['id']) }}" method="POST">
         @csrf
         @method('PUT')

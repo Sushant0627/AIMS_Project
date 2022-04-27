@@ -99,17 +99,23 @@ class LivestockDbController extends Controller
             'frp'=>strip_tags($request['frp']),
         ]);
 
-        $sData = livestock_data::find($id);
+        $query = livestock_data::where('name', $data['name'])->exists();
 
-        $sData->name = $data->name;
-        $sData->mrp = $data->mrp;
-        $sData->frp = $data->frp;
+        if($query){
+            return back()->with('failed', 'Livestock Already In Database');
+        } else {
 
-        $sData->save();
+            $sData = livestock_data::find($id);
 
-        return redirect()->route('livestock.index')->with('success', 'Livestock Updated In Database');
+            $sData->name = $data->name;
+            $sData->mrp = $data->mrp;
+            $sData->frp = $data->frp;
 
-        // return $request->Input();
+            $sData->save();
+
+            return redirect()->route('livestock.index')->with('success', 'Livestock Updated In Database');
+
+        }
     }
 
     /**

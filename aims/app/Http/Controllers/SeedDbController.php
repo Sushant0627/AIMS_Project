@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\seed_data;
 use Illuminate\Http\Request;
 
@@ -54,6 +56,8 @@ class SeedDbController extends Controller
         if($query){
             return redirect()->route('seed.create')->with('failed', 'Seed Already In Database');
         } else {
+
+
             $sData = new seed_data();
 
             $sData->name = $data->name;
@@ -103,19 +107,27 @@ class SeedDbController extends Controller
         ]);
 
         $data = $request->merge([
-            'crop'=>strip_tags($request['crop']),
+            'name'=>strip_tags($request['name']),
             'growth'=>strip_tags($request['growth']),
         ]);
 
-        $sData = seed_data::find($id);
+        $query = seed_data::where('name', $data['name'])->exists();
 
-        $sData->name = $data->name;
-        $sData->growth = $data->growth;
+        if($query){
+            return back()->with('failed', 'Seed Already In Database');
+        } else {
 
-        $sData->save();
+            $sData = seed_data::find($id);
 
-        return redirect()->route('seed.index')->with('success', 'Seed Updated In Database');
+            $sData->name = $data->name;
+            $sData->growth = $data->growth;
+
+            $sData->save();
+
+            return redirect()->route('seed.index')->with('success', 'Seed Updated In Database');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -3,6 +3,7 @@
 @section('title', 'Crop Database')
 
 @section('content')
+<h1>Crop Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>

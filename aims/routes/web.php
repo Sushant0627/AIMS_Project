@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EquipDbController;
 use App\Http\Controllers\LivestockDbController;
 use App\Http\Controllers\CropDbController;
+use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\SeedDbController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'homepage')->name('home');
 Route::view('database', 'layouts/databaseLayout')->name('database');
 Route::view('admin', 'admin/login')->name('admin');
-Route::view('passReset', 'admin/passReset');
+Route::view('passReset', 'admin/passReset')->name('passreset');
 Route::view('adminAcctSett', 'admin\settings\editSettings')->name('adminAcctSett');
 
 Route::fallback(function(){
@@ -74,3 +75,11 @@ Route::controller(LivestockDbController::class)->group(function () {
 });
 
 Route::resource('asc', AccountController::class);
+
+// Farmer
+Route::resource('farmer', FarmerController::class);
+
+Route::controller(FarmerController::class)->group(function () {
+    Route::get('fDelete/{id}', 'destroy');
+    Route::get('fEdit/{id}', 'edit');
+});

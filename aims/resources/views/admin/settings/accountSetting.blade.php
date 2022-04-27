@@ -3,6 +3,15 @@
 @section('title', 'Dashboard')
 
 @section('content')
+
+@if(session()->has('success'))
+    <div class="p-3 mb-2 bg-success text-white">
+        {{ session('success') }}
+    </div>
+@endif
+
+
+
 <div>
     <label for="name">Name: {{$data['fname']}} {{ $data['lname'] }}</label> <br>
     <label for="email">Email: {{$data['email']}}</label> <br> <br>

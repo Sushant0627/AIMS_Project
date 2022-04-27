@@ -18,7 +18,8 @@
 
     @yield('content')
 
-    <script src="{{ asset('js/bootstrap') }}"></script>
+
+    <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 </body>
 
 <footer>

@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class weather_data extends Model
+class farmers extends Model
 {
-    public $table = 'aims_data.weather_data';
+    public $table = 'aims_user.farmers';
+    public $incrementing = false;
     public $timestamps = false;
     use HasFactory;
 }

@@ -3,7 +3,9 @@
 @section('title', 'Add Seed Data')
 
 @section('content')
-
+<h1>
+    Add Crop
+</h1>
 <form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post">
     @csrf
     <label for="name">Name: </label>

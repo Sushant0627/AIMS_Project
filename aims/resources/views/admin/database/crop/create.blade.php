@@ -3,7 +3,7 @@
 @section('title', 'Add Crop Data')
 
 @section('content')
-
+<h1>Add Crop Data</h1>
 <form action="{{ route('crop.store') }}" method="post">
     @csrf
     <label for="name">Name: </label>

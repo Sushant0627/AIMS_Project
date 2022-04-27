@@ -14,12 +14,12 @@
             Database
         </a>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('seed.index') }}">Seed Data</a></li>
             <li><a class="dropdown-item" href="{{ route('livestock.index') }}">Livestock Data</a></li>
             <li><a class="dropdown-item" href="{{ route('equipment.index') }}">Equipment Data</a></li>
             <li><a class="dropdown-item" href="{{ route('crop.index') }}">Crops Data</a></li>
-            <li><a class="dropdown-item" href="">Farmer Data</a></li>
+            <li><a class="dropdown-item" href="{{ route('farmer.index') }}">Farmer Data</a></li>
             <li><a class="dropdown-item" href="empData">Employee Data</a></li>
         </ul>
 
@@ -43,7 +43,7 @@
         @yield('content')
 
         <div>
-            <br>
+            <a href="{{ url()->previous() }}">Back</a>
             <a href="{{ route('dashboard') }}">Return To Dashboard</a>
         </div>
 

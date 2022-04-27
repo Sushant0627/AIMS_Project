@@ -3,26 +3,25 @@
 @section('title', 'Dashboard')
 
 @section('head')
-    <b>
-        AIMS - Dashboard
-    </b>
+    <nav class="navbar navbar-dark bg-dark shadow-sm p-4 ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                AIMS - Dashboard
+            </a>
 
-    <div>
-        <p class="uName" name="uName">
-            {{session('fname')}} {{session('lname')}}
-        </p>
-    </div>
-
-    <div class="dropdown">
-        <a href="#" class="iconDropdown">
-            <img src="uIcon.png" alt="User Icon">
-        </a>
-        <div class="dropdown-content">
-            <a href="logout">Logout</a>
+        <div class="dropdown">
+            <p class="text-primary">
+                {{session('fname')}} {{session('lname')}}
+            </p>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="" alt="" srcset="">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a href="logout">Logout</a></li>
+            </ul>
         </div>
-    </div>
-
-    <br>
+    </nav>
 @endsection
 
 @section('content')

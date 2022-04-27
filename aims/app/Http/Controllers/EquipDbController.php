@@ -92,15 +92,28 @@ class EquipDbController extends Controller
             'name' => ['required', 'min:3'],
         ]);
 
-        $sData = equipment_data::find($id);
+        $data = $request->merge([
+            'name'=>strip_tags($request['name']),
+            'mrp'=>strip_tags($request['mrp']),
+        ]);
 
-        $sData->name = $sData->name;
-        $sData->mrp = $sData->mrp;
+        $query = equipment_data::where('name', $data['name'])->exists();
 
-        $sData->save();
+        if($query){
+            return back()->with('failed', 'Equipment Already In Database');
+        } else {
 
-        return redirect()->route('equipment.index')->with('success', 'Equipment Updated In Database');
+            $sData = equipment_data::find($id);
+
+            $sData->name = $data->name;
+            $sData->mrp = $data->mrp;
+
+            $sData->save();
+
+            return redirect()->route('equipment.index')->with('success', 'Equipment Updated In Database');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

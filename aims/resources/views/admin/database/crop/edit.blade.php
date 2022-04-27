@@ -3,14 +3,14 @@
 @section('title', 'Edit Crop')
 
 @section('content')
-
+<h1>Edit Crop Data</h1>
     <form action="{{ route('crop.update', $data['id']) }}" method="POST">
         @csrf
         @method('PUT')
         <input type="hidden" value="{{ $data['id'] }}" name="id">
 
         <label for="crop">Name</label>
-        <input type="text" name="crop" value="{{ $data['crop'] }}" id="crop"><br>
+        <input type="text" name="name" value="{{ $data['name'] }}" id="crop"><br>
 
         <label for="province">Province</label>
         <input type="text" name="province" value="{{ $data['province'] }}" id="province"><br>

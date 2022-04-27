@@ -3,6 +3,7 @@
 @section('title', 'Employee Sheet')
 
 @section('content')
+<h1>Employee Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>

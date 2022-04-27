@@ -4,6 +4,8 @@
 
 @section('content')
 
+<h1>Add a Livestock Data</h1>
+
 <form action="{{ route('livestock.store') }}" method="post">
     @csrf
     <label for="name">Name</label>

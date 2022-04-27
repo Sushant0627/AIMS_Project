@@ -59,12 +59,7 @@ class AccountController extends Controller
      */
     public function edit($data)
     {
-        if($data=='email'){
-            return view('admin\settings\editSettings', ['which'=>$data]);
-        }
-        else if ($data == 'password'){
-            return view('admin\settings\editSettings', ['which'=>$data]);
-        }
+        return view('admin\settings\editSettings', ['which'=>$data]);
     }
 
     /**
@@ -84,20 +79,26 @@ class AccountController extends Controller
 
             $validated = $request->validate([
                 'nEmail'=>'required',
-                'passphrase'=>'required',
+                'passphrase'=>['required', 'min:5'],
             ]);
 
-            $query->email = $request['nEmail'];
+            if ($query['passphrase'] == $request['passphrase']){
+                $query->email = $request['nEmail'];
 
-            $query->save();
+                $query->save();
 
-            return redirect(route('asc.index'));
+                return redirect(route('asc.index'))->with('success', 'Email Changed Successfully');
+            }
+            else {
+                return back()->with('error', 'Wrong Password');
+            }
+
         }
         else if ($request['which']=='password') {
             $validated = $request->validate([
-                'oldPassword'=>'required',
-                'newPassword'=>'required',
-                'rePassword'=>'required',
+                'oldPassword'=>['required', 'min:5'],
+                'newPassword'=>['required', 'min:5'],
+                'rePassword'=>['required', 'min:5'],
             ]);
 
             if ($query['passphrase'] == $request['oldPassword']){
@@ -107,15 +108,14 @@ class AccountController extends Controller
 
                     $query->save();
 
-                    return redirect(route('asc.index'));
+                    return redirect(route('asc.index'))->with('success', 'Password Changed Successfully');
                 } else {
 
-                    return view('admin\settings\editSettings', ['which'=>'password','msg'=>'Please Enter the Same Password']);
+                    return back()->with('error', 'Please Enter the Same Password');
                 }
             }
             else {
-
-                return view('admin\settings\editSettings', ['which'=>'password','message'=>'Wrong Password']);
+                return back()->with('error', 'Wrong Password');
             }
         }
     }

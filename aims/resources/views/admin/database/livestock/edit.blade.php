@@ -4,6 +4,8 @@
 
 @section('content')
 
+    <h1>Edit Livestock Data</h1>
+
     <form action="{{ route('livestock.update', $data['id']) }}" method="POST">
         @csrf
         @method('PUT')

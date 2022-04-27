@@ -3,7 +3,7 @@
 @section('title', 'Equipment Database')
 
 @section('content')
-
+    <h1>Equipment Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>

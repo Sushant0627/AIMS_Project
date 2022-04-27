@@ -3,7 +3,7 @@
 @section('title', 'Seed Database')
 
 @section('content')
-
+<h1>Seed Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -20,7 +20,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data['name'] }}</td>
                 <td>{{ $data['growth'] }}</td>
-                <td><img src="{{asset($data['imgPath'])}}"></td>
+                <td><img src="{{asset($data['imgName'])}}(WIP)"></td>
                 <td><a href="{{ 'sDelete/'.$data['id'] }}">Delete</a> |
                     <a href="{{ 'sEdit/'.$data['id'] }}">Edit</a></td>
             </tr>
