@@ -16,9 +16,11 @@ class CropDbController extends Controller
     {
         $query = crops_data::all();
 
-        return view('admin/database/crop/index', ['datas'=>$query]);
-
-        // return $query;
+        if(session('user')=='admin'){
+            return view('admin/database/crop/index', ['datas'=>$query]);
+        } else {
+            return view('database/crop/index', ['datas'=>$query]);
+        }
     }
 
     /**

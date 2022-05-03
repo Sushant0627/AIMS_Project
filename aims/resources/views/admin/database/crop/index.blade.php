@@ -3,6 +3,7 @@
 @section('title', 'Crop Database')
 
 @section('content')
+
 <h1>Crop Database</h1>
     <table class="table table-striped">
         <thead>
@@ -14,7 +15,10 @@
                 <td>Ward</td>
                 <td>Market Rate Price</td>
                 <td>Farmers Rate Price</td>
-                <td>Operation</td>
+
+                @if(isset($user))
+                    <td>Operation</td>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -27,13 +31,17 @@
                 <td>{{ $data['ward'] }}</td>
                 <td>Rs. {{ $data['mrp'] }}</td>
                 <td>Rs. {{ $data['frp'] }}</td>
-                <td><a href="{{ 'cDelete/'.$data['id'] }}">Delete</a> |
-                    <a href="{{ 'cEdit/'.$data['id'] }}">Edit</a></td>
+                @if(session('user')=='admin')
+                    <td><a href="{{ 'cDelete/'.$data['id'] }}">Delete</a> |
+                        <a href="{{ 'cEdit/'.$data['id'] }}">Edit</a></td>
+                @endif
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <a href="{{ route('crop.create') }}">Add</a>
+    @if(isset($user))
+        <a href="{{ route('crop.create') }}">Add</a>
+    @endif
 
 @endsection

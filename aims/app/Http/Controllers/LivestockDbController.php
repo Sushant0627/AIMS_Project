@@ -17,7 +17,11 @@ class LivestockDbController extends Controller
     {
         $query = livestock_data::all();
 
-        return view('admin/database/livestock/index', ['datas'=>$query]);
+        if(session('user')=='admin'){
+            return view('admin/database/livestock/index', ['datas'=>$query]);
+        } else {
+            return view('database/livestock/index', ['datas'=>$query]);
+        }
 
         // return $query;
     }

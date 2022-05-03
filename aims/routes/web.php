@@ -7,6 +7,7 @@ use App\Http\Controllers\LivestockDbController;
 use App\Http\Controllers\CropDbController;
 use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\SeedDbController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ Route::view('database', 'layouts/databaseLayout')->name('database');
 Route::view('admin', 'admin/login')->name('admin');
 Route::view('passReset', 'admin/passReset')->name('passreset');
 Route::view('adminAcctSett', 'admin\settings\editSettings')->name('adminAcctSett');
+Route::view('signup', 'signUp')->name('signup');
+Route::view('reset', 'forgotAccount')->name('reset');
 
 Route::fallback(function(){
     return redirect('PageNotFound');
@@ -82,4 +85,13 @@ Route::resource('farmer', FarmerController::class);
 Route::controller(FarmerController::class)->group(function () {
     Route::get('fDelete/{id}', 'destroy');
     Route::get('fEdit/{id}', 'edit');
+});
+
+//User
+Route::controller(UserController::class)->group(function () {
+    Route::get('login', 'getLoginPage')->name('login');
+    Route::get('accLogout', 'getLogout');
+    Route::post('accLogin', 'getAcc');
+    Route::get('accReset',  'getAccReset');
+    Route::post('accSignup',  'postCreateAcc');
 });

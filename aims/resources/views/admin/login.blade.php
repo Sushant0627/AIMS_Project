@@ -30,7 +30,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="employeeID"> Employee ID: </label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="id" id="id" value="{{ old('Employee ID') }}" placeholder='Enter Your Employee ID' maxlength=7>
+                    <input class="form-control" type="text" name="id" id="id" value="{{ old('id') }}" placeholder='Enter Your Employee ID' maxlength=7>
                 </div>
 
                 @error('id')

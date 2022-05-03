@@ -18,7 +18,11 @@ class SeedDbController extends Controller
     {
         $query = seed_data::all();
 
-        return view('admin/database/seed/index', ['datas'=>$query]);
+        if(session('user')=='admin'){
+            return view('admin/database/seed/index', ['datas'=>$query]);
+        } else {
+            return view('database/seed/index', ['datas'=>$query]);
+        }
 
         // return $query;
     }

@@ -1,4 +1,14 @@
-@extends('layouts/databaseLayout')
+@if(session('user')==('admin'))
+    @php
+        $layout = 'databaseLayout'
+    @endphp
+@else
+    @php
+        $layout = 'layout'
+    @endphp
+@endif
+
+@extends('layouts/' . $layout)
 
 @section('title', 'Seed Database')
 
@@ -11,7 +21,10 @@
                 <td>Name</td>
                 <td>Growth (in Days)</td>
                 <td>Image</td>
-                <td>Operation</td>
+
+                @if(session('user')=='admin')
+                    <td>Operation</td>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -21,13 +34,17 @@
                 <td>{{ $data['name'] }}</td>
                 <td>{{ $data['growth'] }}</td>
                 <td><img src="{{asset($data['imgName'])}}(WIP)"></td>
-                <td><a href="{{ 'sDelete/'.$data['id'] }}">Delete</a> |
-                    <a href="{{ 'sEdit/'.$data['id'] }}">Edit</a></td>
+                @if(session('user')=='admin')
+                    <td><a href="{{ 'sDelete/'.$data['id'] }}">Delete</a> |
+                        <a href="{{ 'sEdit/'.$data['id'] }}">Edit</a></td>
+                @endif
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <a href="{{ route('seed.create') }}">Add</a>
+    @if(session('user')=='admin')
+        <a href="{{ route('seed.create') }}">Add</a>
+    @endif
 
 @endsection

@@ -37,6 +37,7 @@ class AdminController extends Controller{
             $request->session()->put('id', $query['eid']);
             $request->session()->put('fname', $query['fname']);
             $request->session()->put('lname', $query['lname']);
+            $request->session()->put('user', 'admin');
 
             return redirect('adminDash');
         } else {
@@ -51,7 +52,9 @@ class AdminController extends Controller{
     }
 
     function getLogout(){
-        session()->pull('id');
+        session()->forget('id');
+        session()->forget('user');
+        session()->flush();
 
         return redirect('admin');
     }

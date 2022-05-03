@@ -17,7 +17,11 @@ class EquipDbController extends Controller
     {
         $query = equipment_data::all();
 
-        return view('admin/database/equipment/index', ['datas'=>$query]);
+        if(session('user')=='admin'){
+            return view('admin/database/equipment/index', ['datas'=>$query]);
+        } else {
+            return view('database/equipment/index', ['datas'=>$query]);
+        }
 
         // return $query;
     }
