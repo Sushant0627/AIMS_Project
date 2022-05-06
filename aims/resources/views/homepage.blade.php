@@ -5,7 +5,7 @@
 @section('content')
     <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="container" data-aos="fade-in">
+    <div class="container">
       <h1>Welcome to AIMS</h1>
       <h2>A website where you can find information regarding Agriculture.</h2>
     </div>
@@ -198,12 +198,12 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <img src="{{ asset('images/ragoon.jpg') }}" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="{{ url('https://twitter.com/Rairagoon') }}" target="_blank"><i class="bi bi-twitter"></i></a>
+                  <a href="{{ url('https://www.facebook.com/dipen.bantawa.963/') }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                  <a href="{{ url('https://www.instagram.com/ragoon.rai/') }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="{{ url('https://www.linkedin.com/in/dipen-bantawa-a990a0174/') }}" target="_blank"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
               <div class="member-info">

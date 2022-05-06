@@ -36,9 +36,12 @@
             @endforeach
         </tbody>
     </table>
-    <div class="clearfix">
-        <button class="btn btn-success btn-lg float-right">Add Crop</button>
-    </div>
+
+    @if(session('user') == 'normal')
+        <div class="clearfix">
+            <a class="btn btn-success btn-lg float-right" href="{{ route('crop.create') }}">Add Crop</a>
+        </div>
+    @endif
 </div>
 
 @endsection

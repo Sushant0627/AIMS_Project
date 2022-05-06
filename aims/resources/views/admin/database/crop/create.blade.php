@@ -1,57 +1,76 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Add Crop Data')
 
 @section('content')
-<h1>Add Crop Data</h1>
-<form action="{{ route('crop.store') }}" method="post">
-    @csrf
-    <label for="name">Name: </label>
-    <input type="text" name="crop" id="name"> <br>
-    @error('crop')
-        {{ $message }} <br>
-    @enderror
+<div class="container">
+    <h1>Add Crop Data</h1>
+    <form action="{{ route('crop.store') }}" method="post">
+        @csrf
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Crop Name" name="crop">
+            <label for="floatingInput">Name</label>
+        </div>
+        @error('crop')
+            {{ $message }} <br>
+        @enderror
 
-    <label for="province">Province: </label>
-    <select name="province" id="province" onload="select()" onclick="select()">
-        Province:
-        <option value="-">--</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-    </select><br>
-    @error('province')
-        {{ $message }} <br>
-    @enderror
+        <div class="row">
+            <div class="form-floating col">
+                <select class="form-select" name="province" id="floatingSelect">
+                    Province:
+                    <option value="-">--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <label for="floatingSelect">Province</label>
+            </div>
+            @error('province')
+                {{ $message }} <br>
+            @enderror
 
-    <label for="municipality">Municipality: </label>
-    <input type="text" name="municipality" id="municipality"><br>
-    @error('municipality')
-        {{ $message }} <br>
-    @enderror
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="municipality" placeholder="Municipality Name" id="floatingInput"><br>
+                <label for="floatingInput">Municipality </label>
+            </div>
+            @error('municipality')
+                {{ $message }} <br>
+            @enderror
 
-    <label for="ward">Ward: </label>
-    <input type="text" name="ward" id="ward"><br>
-    @error('ward')
-        {{ $message }} <br>
-    @enderror
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="ward" placeholder="Ward No." id="floatingInput"><br>
+                <label for="floatingInput">Ward</label>
+            </div>
+            @error('ward')
+                {{ $message }} <br>
+            @enderror
+        </div>
 
-    <label for="mrp">Market Rate Price: </label>
-    <input type="text" name="mrp" id="mrp"><br>
-    @error('mrp')
-        {{ $message }} <br>
-    @enderror
+        <div class="row">
+            <div class="col form-floating">
+                <input class="form-control" type="text" placeholder="MRP" name="mrp" id="floatingInput"><br>
+                <label for="floatingInput">Market Rate Price </label>
+            </div>
+            @error('mrp')
+                {{ $message }} <br>
+            @enderror
 
-    <label for="frp">Farmers Rate Price: </label>
-    <input type="text" name="frp" id="frp"><br>
-    @error('frp')
-        {{ $message }} <br>
-    @enderror
+            <div class="form-floating col">
+                <input class="form-control" type="text" placeholder="FRP" name="frp" id="floatingInput"><br>
+                <label for="floatingInput">Farmers Rate Price</label>
+            </div>
+            @error('frp')
+                {{ $message }} <br>
+            @enderror
+        </div>
 
-    <button type="submit">Submit</button>
-</form>
+        <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
+        <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
+    </form>
+</div>
 @endsection

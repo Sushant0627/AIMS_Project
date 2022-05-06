@@ -5,10 +5,10 @@
 @section('head')
     <nav class="navbar navbar-dark bg-dark shadow-sm p-3">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            Agriculture Information Management System
-        </a>
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('images/logo.png') }}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                Agriculture Information Management System
+            </a>
         </div>
     </nav>
 
@@ -16,34 +16,29 @@
 
 @section('content')
 
-<div class="container border rounded mx-auto p-5 m-4">
-    <div class="">
-        <b>
-            Sign In
-        </b>
-        <hr>
-    </div>
+<div class="wrapper">
+    <div class="d-flex justify-content-center pt-5">
+        <div class="shadow">
+            <form class="adminLoginForm" action="Auth" method="post">
+                @csrf
+                <span class="d-flex justify-content-center m-5">
+                    <h2>Admin Login Page</h2>
+                </span>
 
-    <div>
-        <form action="Auth" method="POST">
-            @csrf
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="employeeID"> Employee ID: </label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="text" name="id" id="id" value="{{ old('id') }}" placeholder='Enter Your Employee ID' maxlength=7>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="floatingInput" placeholder="Employee ID" name="id" value="{{ old('id') }}">
+                    <label for="floatingInput">Employee ID</label>
                 </div>
 
-                @error('id')
+                @error('email')
                     <div class="text-danger">
                         {{$message}}
                     </div>
                 @enderror
-            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="passsword">Password: </label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="password" name="password" id="password" placeholder='Enter Your Password'>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                    <label for="floatingPassword">Password</label>
                 </div>
 
                 @if (session()->has('status'))
@@ -52,21 +47,29 @@
                     </div>
                 @endif
 
-                @error('passphrase')
+                @error('password')
                     <div class="text-danger">
                         {{$message}}
                     </div>
                 @enderror
-            </div>
 
-            <div class="forgot" style="text-align:center">
-                <a href="{{ route('passreset') }}">Forgot Your Password?</a>
-            </div>
+                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                    <div>
 
-            <div class="button">
-                <button class="btn btn-outline-secondary" type="submit">Login</button>
+                    </div>
+                    <div>
+                        <a href="{{ route('passReset') }}" class="txt1">
+                            Forgot Password?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="loginFormBtnContain">
+                    <button class="btn btn-success btn-lg btn-block" type="submit">Login</button>
+                </div>
+            </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 

@@ -3,7 +3,8 @@
 @section('title', 'Employee Sheet')
 
 @section('content')
-<h1>Employee Database</h1>
+<div class="container">
+    <h1>Employee Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,4 +27,5 @@
             @endforeach
         </tbody>
     </table>
+</div>
 @endsection

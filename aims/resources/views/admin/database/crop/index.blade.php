@@ -1,10 +1,11 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Crop Database')
 
 @section('content')
 
-<h1>Crop Database</h1>
+<div class="container">
+    <h1>Crop Database</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,10 +16,7 @@
                 <td>Ward</td>
                 <td>Market Rate Price</td>
                 <td>Farmers Rate Price</td>
-
-                @if(isset($user))
-                    <td>Operation</td>
-                @endif
+                <td>Operation</td>
             </tr>
         </thead>
         <tbody>
@@ -40,8 +38,9 @@
         </tbody>
     </table>
 
-    @if(isset($user))
-        <a href="{{ route('crop.create') }}">Add</a>
-    @endif
+    <a class="btn btn-success btn-lg btn-block" href="{{ route('crop.create') }}">Add</a>
+    <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
+</div>
+
 
 @endsection

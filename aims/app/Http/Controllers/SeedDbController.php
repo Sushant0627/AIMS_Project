@@ -23,8 +23,6 @@ class SeedDbController extends Controller
         } else {
             return view('database/seed/index', ['datas'=>$query]);
         }
-
-        // return $query;
     }
 
     /**
@@ -34,7 +32,11 @@ class SeedDbController extends Controller
      */
     public function create()
     {
-        return view('admin/database/seed/create');
+        if(session('user')=='admin'){
+            return view('admin/database/seed/create');
+        } else {
+            return view('database/seed/create');
+        }
     }
 
     /**

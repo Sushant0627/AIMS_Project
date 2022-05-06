@@ -3,9 +3,10 @@
 @section('title', 'Farmers')
 
 @section('content')
-<h1>Farmer's Data</h1>
+<div class="container">
+    <h1>Farmer's Data</h1>
     <div>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <td>SN</td>
                 <td>First Name</td>
@@ -32,14 +33,15 @@
                     <td>{{ $data['province'] }}</td>
                     <td>{{ $data['state'] }}</td>
                     <td>
-                        <a href="{{ 'fEdit/'.$data['id'] }}">Edit</a>
+                        <a href="{{ 'fEdit/'.$data['id'] }}">Edit</a> |
                         <a href="{{ 'fDelete/'.$data['id'] }}">Delete</a>
                     </td>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <div>
-        <a href="{{ route('farmer.create') }}">Add</a>
-    </div>
+
+    <a class="btn btn-success btn-lg btn-block" href="{{ route('farmer.create') }}">Add</a>
+    <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
+</div>
 @endsection

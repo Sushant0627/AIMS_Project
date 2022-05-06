@@ -58,4 +58,8 @@ class AdminController extends Controller{
 
         return redirect('admin');
     }
+
+    function getPassReset(){
+        return view('admin/passReset');
+    }
 }

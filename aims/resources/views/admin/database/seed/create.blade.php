@@ -1,31 +1,43 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Add Seed Data')
 
 @section('content')
-<h1>
-    Add Crop
-</h1>
-<form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post">
-    @csrf
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name" placeholder="Enter Crop Name"> <br>
-    @error('name')
-        {{ $message }} <br>
-    @enderror
+<div class="container">
+    <h1>
+        Add Crop
+    </h1>
+    <form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post">
+        @csrf
 
-    <label for="growth">Growth: </label>
-    <input type="text" name="growth" id="growth" placeholder="Growth"> <br>
-    @error('growth')
-        {{ $message }} <br>
-    @enderror
+        <div class="row mb-3">
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter Crop Name">
+                <label for="name">Name: </label>
+            </div>
+            @error('name')
+                {{ $message }} <br>
+            @enderror
 
-    <label for="picture">Picture: </label>
-    <input type="file" name="picture" id="picture"><br>
-    @error('picture')
-        {{ $message }} <br>
-    @enderror
+            <div class="form-floating col ">
+                <input class="form-control" type="text" name="growth" id="growth" placeholder="Growth">
+                <label for="growth">Growth</label>
+            </div>
+            @error('growth')
+                {{ $message }} <br>
+            @enderror
+        </div>
 
-    <button type="submit">Submit</button>
-</form>
+        <div class="form-label mb-3">
+            <label for="picture">Picture</label>
+            <input class="form-control" type="file" name="picture" id="picture">
+        </div>
+        @error('picture')
+            {{ $message }} <br>
+        @enderror
+
+        <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
+        <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
+    </form>
+</div>
 @endsection

@@ -1,23 +1,25 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/layout')
 
 @section('title', 'Add Equipment Data')
 
 @section('content')
-<h1>Add Equipment Data</h1>
-<form action="{{ route('equipment.store') }}" method="post">
-    @csrf
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name"><br>
-    @error('name')
-        {{ $message }} <br>
-    @enderror
+<div class="container mb-5">
+    <h1>Add Equipment Data</h1>
+    <form action="{{ route('equipment.store') }}" method="post" class="border p-5">
+        @csrf
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" class="form-control"><br>
+        @error('name')
+            {{ $message }} <br>
+        @enderror
 
-    <label for="name">Market Rate Price: </label>
-    <input type="text" name="mrp" id="mrp"> <br>
-    @error('mrp')
-        {{ $message }} <br>
-    @enderror
+        <label for="name">Market Rate Price: </label>
+        <input type="text" name="mrp" id="mrp" class="form-control"> <br>
+        @error('mrp')
+            {{ $message }} <br>
+        @enderror
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+    </form>
+</div>
 @endsection

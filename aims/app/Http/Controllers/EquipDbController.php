@@ -33,7 +33,11 @@ class EquipDbController extends Controller
      */
     public function create()
     {
-        return view('admin/database/equipment/create');
+        if(session('user')=='admin'){
+            return view('admin/database/equipment/create');
+        } else {
+            return view('database/equipment/create');
+        }
     }
 
     /**

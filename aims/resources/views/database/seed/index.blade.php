@@ -26,6 +26,12 @@
             @endforeach
         </tbody>
     </table>
+
+    @if(session('user') == 'normal')
+        <div class="clearfix">
+            <a class="btn btn-success btn-lg float-right" href="{{ route('seed.create') }}">Add Seed</a>
+        </div>
+    @endif
 </div>
 
 @endsection

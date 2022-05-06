@@ -1,31 +1,38 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/layout')
 
 @section('title', 'Add Livestock Data')
 
 @section('content')
+<div class="container mb-5">
+    <h1>Add a Livestock Data</h1>
 
-<h1>Add a Livestock Data</h1>
+    <form action="{{ route('livestock.store') }}" method="post" class="border p-5">
+        @csrf
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control"><br>
+        @error('name')
+            {{ $message }} <br>
+        @enderror
 
-<form action="{{ route('livestock.store') }}" method="post">
-    @csrf
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name"><br>
-    @error('name')
-        {{ $message }} <br>
-    @enderror
+        <div class="row">
+            <div class="col">
+                <label for="mrp">Market Rate Price: </label>
+                <input type="text" name="mrp" id="mrp" class="form-control"><br>
+                @error('mrp')
+                    {{ $message }} <br>
+                @enderror
+            </div>
 
-    <label for="mrp">Market Rate Price: </label>
-    <input type="text" name="mrp" id="mrp"><br>
-    @error('mrp')
-        {{ $message }} <br>
-    @enderror
+            <div class="col">
+                <label for="frp">Farmers Rate Price</label>
+                <input type="text" name="frp" id="frp" class="form-control"><br>
+                @error('frp')
+                    {{ $message }} <br>
+                @enderror
+            </div>
+        </div>
 
-    <label for="frp">Farmers Rate Price</label>
-    <input type="text" name="frp" id="frp"><br>
-    @error('frp')
-        {{ $message }} <br>
-    @enderror
-
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+    </form>
+</div>
 @endsection

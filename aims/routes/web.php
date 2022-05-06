@@ -23,12 +23,13 @@ use Illuminate\Support\Facades\Route;
 
 // admin view
 Route::view('/', 'homepage')->name('home');
-Route::view('database', 'layouts/databaseLayout')->name('database');
 Route::view('admin', 'admin/login')->name('admin');
-Route::view('passReset', 'admin/passReset')->name('passreset');
-Route::view('adminAcctSett', 'admin\settings\editSettings')->name('adminAcctSett');
 Route::view('signup', 'signUp')->name('signup');
 Route::view('reset', 'forgotAccount')->name('reset');
+
+Route::view('database', 'layouts/databaseLayout')->name('database');
+Route::view('adminAcctSett', 'admin\settings\accountSetting')->name('adminAcctSett');
+Route::view('editAdminAcc', 'admin\settings\editSettings')->name('editAdminAcc');
 
 Route::fallback(function(){
     return redirect('PageNotFound');
@@ -40,6 +41,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('Auth', 'UserAuth');
     Route::get('empData',  'adminDisplay');
     Route::get('adminDash', 'getDashboard')->name('dashboard');
+    Route::get('passReset', 'getPassReset')->name('passReset');
 });
 
 //  Seed

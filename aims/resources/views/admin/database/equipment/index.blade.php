@@ -1,18 +1,10 @@
-@if(session('user')==('admin'))
-    @php
-        $layout = 'databaseLayout'
-    @endphp
-@else
-    @php
-        $layout = 'layout'
-    @endphp
-@endif
-
-@extends('layouts/' . $layout)
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Equipment Database')
 
 @section('content')
+
+<div class="container">
     <h1>Equipment Database</h1>
     <table class="table table-striped">
         <thead>
@@ -20,10 +12,7 @@
                 <td>ID</td>
                 <td>Name</td>
                 <td>Market Rate Price</td>
-
-                @if(session('user'=='admin'))
-                    <td>Operation</td>
-                @endif
+                <td>Operation</td>
             </tr>
         </thead>
 
@@ -33,18 +22,16 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$data['name']}}</td>
                 <td>Rs. {{$data['mrp']}}</td>
-
-                @if(session('user'=='admin'))
-                    <td><a href="{{ 'eDelete/'.$data['id'] }}">Delete</a> |
-                        <a href="{{ 'eEdit/'.$data['id'] }}">Edit</a></td>
-                @endif
+                <td><a href="{{ 'eDelete/'.$data['id'] }}">Delete</a> |
+                    <a href="{{ 'eEdit/'.$data['id'] }}">Edit</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    @if(session('user'=='admin'))
-        <a href="{{ route('equipment.create') }}">Add</a>
-    @endif
+    <a class="btn btn-success btn-lg btn-block" href="{{ route('equipment.create') }}">Add</a>
+    <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
+</div>
+
 
 @endsection

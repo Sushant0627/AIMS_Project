@@ -25,6 +25,12 @@
         @endforeach
         </td>
     </table>
+
+    @if(session('user') == 'normal')
+        <div class="clearfix">
+            <a class="btn btn-success btn-lg float-right" href="{{ route('livestock.create') }}">Add Livestock</a>
+        </div>
+    @endif
 </div>
 
 @endsection

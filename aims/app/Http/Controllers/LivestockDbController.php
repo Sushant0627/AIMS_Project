@@ -33,7 +33,11 @@ class LivestockDbController extends Controller
      */
     public function create()
     {
-        return view('admin/database/livestock/create');
+        if(session('user')=='admin'){
+            return view('admin/database/livestock/create');
+        } else {
+            return view('database/livestock/create');
+        }
     }
 
     /**

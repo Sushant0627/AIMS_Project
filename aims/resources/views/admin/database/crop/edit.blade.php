@@ -3,31 +3,70 @@
 @section('title', 'Edit Crop')
 
 @section('content')
-<h1>Edit Crop Data</h1>
+<div class="container">
+    <h1>Edit Crop Data</h1>
     <form action="{{ route('crop.update', $data['id']) }}" method="POST">
         @csrf
         @method('PUT')
         <input type="hidden" value="{{ $data['id'] }}" name="id">
 
-        <label for="crop">Name</label>
-        <input type="text" name="name" value="{{ $data['name'] }}" id="crop"><br>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="name" value="{{ $data['name'] }}" id="floatingInput">
+            <label for="floatingInput">Name</label>
+        </div>
+        @error('name')
+            {{ $message }} <br>
+        @enderror
 
-        <label for="province">Province</label>
-        <input type="text" name="province" value="{{ $data['province'] }}" id="province"><br>
+        <div class="row mb-3">
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="province" value="{{ $data['province'] }}" id="floatingInput">
+                <label for="floatingInput">Province</label>
+            </div>
+            @error('province')
+                {{ $message }} <br>
+            @enderror
 
-        <label for="municipality">Municipality</label>
-        <input type="text" name="municipality" value="{{ $data['municipality'] }}" id="municipality"><br>
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="municipality" value="{{ $data['municipality'] }}" id="floatingInput">
+                <label for="floatingInput">Municipality</label>
+            </div>
+            @error('municipality')
+                {{ $message }} <br>
+            @enderror
 
-        <label for="ward">Ward</label>
-        <input type="text" name="ward" value="{{ $data['ward'] }}" id="ward"><br>
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="ward" value="{{ $data['ward'] }}" id="floatingInput">
+                <label for="floatingInput">Ward</label>
+            </div>
+            @error('ward')
+                {{ $message }} <br>
+            @enderror
+        </div>
 
-        <label for="mrp">Market Rate Price</label>
-        <input type="text" name="mrp" value="{{ $data['mrp'] }}" id="mrp"><br>
+        <div class="row mb-3">
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="mrp" value="{{ $data['mrp'] }}" id="floatingInput"><br>
+                <label for="floatingInput">Market Rate Price</label>
+            </div>
+            @error('mrp')
+                {{ $message }} <br>
+            @enderror
 
-        <label for="frp">Farmer Rate Price</label>
-        <input type="text" name="frp" value="{{ $data['frp'] }}" id="frp"><br>
+            <div class="form-floating col">
+                <input class="form-control" type="text" name="frp" value="{{ $data['frp'] }}" id="floatingInput"><br>
+                <label for="floatingInput">Farmer Rate Price</label>
+            </div>
+            @error('frp')
+                {{ $message }} <br>
+            @enderror
+        </div>
 
-        <button type="submit">Submit</button>
+
+        <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
+        <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
     </form>
+</div>
+
 
 @endsection
