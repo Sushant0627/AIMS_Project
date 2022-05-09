@@ -65,7 +65,7 @@
         </div>
 
 
-        <div class="row">
+        <div class="row mb-3">
             <div class="form-floating col">
                 <input class="form-control" type="text" name="address" id="address">
                 <label for="address">Address</label>
@@ -90,6 +90,14 @@
                 {{ $message }} <br>
             @enderror
         </div>
+
+        <div class="form-label mb-3">
+            <label for="image">Picture</label>
+            <input class="form-control" type="file" name="image" id="image">
+        </div>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
 
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>

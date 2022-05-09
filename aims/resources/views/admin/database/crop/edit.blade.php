@@ -1,11 +1,14 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Edit Crop')
 
 @section('content')
 <div class="container">
-    <h1>Edit Crop Data</h1>
-    <form action="{{ route('crop.update', $data['id']) }}" method="POST">
+    <div class="border-bottom p-2">
+        <h1>Edit Crop Data</h1>
+    </div>
+
+    <form action="{{ route('crop.update', $data['id']) }}" method="POST" class="mt-3">
         @csrf
         @method('PUT')
         <input type="hidden" value="{{ $data['id'] }}" name="id">
@@ -62,6 +65,11 @@
             @enderror
         </div>
 
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" value="{{ $data['imgName'] }} class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
 
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>

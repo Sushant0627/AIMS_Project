@@ -25,6 +25,9 @@
 					<span class="loginFormTitle p-b-43">
 						Login Page
 					</span>
+                    <p class="text-center">
+                        Please Enter You Email and Password Provided by the Organization.
+                    </p>
 
 					<div class="inputWrap">
 						<input class="inpt" type="text" name="email" value="{{ old('email') }}" placeholder="Email" required>
@@ -70,13 +73,13 @@
                         <button class="loginFormBtn" type="submit">Login</button>
                     </div>
 
-					<div class="text-center p-t-46 p-b-20">
+					{{-- <div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
                             <a href="{{ route('signup') }}">
                                 Don't Have Account? Sign Up
                             </a>
 						</span>
-					</div>
+					</div> --}}
 				</form>
 
 				<div class="loginM" style="background-image: url('images/loginBack.jpg');">

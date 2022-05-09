@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CropExport;
 use App\Models\crops_data;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class CropDbController extends Controller
 {
@@ -14,12 +17,12 @@ class CropDbController extends Controller
      */
     public function index()
     {
-        $query = crops_data::all();
+        $datas = crops_data::all();
 
         if(session('user') == 'admin'){
-            return view('admin/database/crop/index', ['datas'=>$query]);
+            return view('admin/database/crop/index', compact('datas'));
         } else {
-            return view('database/crop/index', ['datas'=>$query]);
+            return view('database/crop/index', compact('datas'));
         }
     }
 
@@ -62,6 +65,9 @@ class CropDbController extends Controller
         if($query){
             return redirect()->route('crop.create')->with('failed', 'Crop Already In Database');
         } else {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/crop'), $imageName);
+
             $sData = new crops_data();
 
             $sData->name = $data->crop;
@@ -70,6 +76,7 @@ class CropDbController extends Controller
             $sData->ward = $data->ward;
             $sData->mrp = $data->mrp;
             $sData->frp = $data->frp;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
@@ -115,6 +122,9 @@ class CropDbController extends Controller
         if($query){
             return back()->with('failed', 'Crop Already In Database');
         } else {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/crop'), $imageName);
+
             $sData = crops_data::find($id);
 
             $sData->name = $data->name;
@@ -123,6 +133,7 @@ class CropDbController extends Controller
             $sData->ward = $data->ward;
             $sData->mrp = $data->mrp;
             $sData->frp = $data->frp;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
@@ -143,5 +154,22 @@ class CropDbController extends Controller
         $data->delete();
 
         return redirect()->route('crop.index')->with('success', 'Crop Deleted From Database');
+    }
+
+    // Generate PDF
+    public function createPDF() {
+        // retreive all records from db
+        $datas = crops_data::all()->toArray();
+
+        // share data to view
+        view()->share('crop',$datas);
+        $pdf = PDF::loadView('admin/database/crop/index', compact('datas'));
+
+        // download PDF file with download method
+        return $pdf->download('crop_data.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new CropExport, 'crop.xlsx');
     }
 }

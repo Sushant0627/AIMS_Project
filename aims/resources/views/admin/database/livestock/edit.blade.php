@@ -4,9 +4,11 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Livestock Data</h1>
+    <div class="border-bottom p-2">
+        <h1>Edit Livestock Data</h1>
+    </div>
 
-    <form action="{{ route('livestock.update', $data['id']) }}" method="POST">
+    <form action="{{ route('livestock.update', $data['id']) }}" method="POST" class="mt-3">
         @csrf
         @method('PUT')
         <input type="hidden" value="{{ $data['id'] }}" name="id">
@@ -26,8 +28,13 @@
                 <input class="form-control" type="text" name="frp" value="{{ $data['frp'] }}" id="frp"><br>
                 <label for="frp">Farmers Rate Price</label>
             </div>
-
         </div>
+
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" value="{{ $data['imgName'] }}" class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
 
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>

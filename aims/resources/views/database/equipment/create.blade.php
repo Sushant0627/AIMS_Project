@@ -19,6 +19,12 @@
             {{ $message }} <br>
         @enderror
 
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
+
         <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
     </form>
 </div>

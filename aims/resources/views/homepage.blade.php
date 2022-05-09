@@ -162,12 +162,12 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="{{ asset('images/teamphoto/Sushant.jpg') }}" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="{{ url("https://twitter.com/Sushant_pandit0") }}"><i class="bi bi-twitter"></i></a>
+                  <a href="{{ url("https://www.facebook.com/neymar.sushant/") }}"><i class="bi bi-facebook"></i></a>
+                  <a href="{{ url("https://www.instagram.com/_sushant.27_/") }}"><i class="bi bi-instagram"></i></a>
+                  <a href="{{ url("https://www.linkedin.com/in/sushant-pandit-06ab99215/") }}"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
               <div class="member-info">
@@ -180,12 +180,12 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <img src="{{ asset('images/teamphoto/Naresh.jpg') }}" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  {{-- <a href=""><i class="bi bi-twitter"></i></a> --}}
+                  <a href="{{ url("https://www.facebook.com/naresh.shah.52493499/") }}"><i class="bi bi-facebook"></i></a>
+                  <a href="{{ url("https://www.instagram.com/_nareshshah/") }}"><i class="bi bi-instagram"></i></a>
+                  {{-- <a href=""><i class="bi bi-linkedin"></i></a> --}}
                 </div>
               </div>
               <div class="member-info">
@@ -198,7 +198,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="{{ asset('images/ragoon.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('images/teamphoto/ragoon.jpg') }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href="{{ url('https://twitter.com/Rairagoon') }}" target="_blank"><i class="bi bi-twitter"></i></a>
                   <a href="{{ url('https://www.facebook.com/dipen.bantawa.963/') }}" target="_blank"><i class="bi bi-facebook"></i></a>
@@ -216,7 +216,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                {{-- <img src="{{ asset('images/teamphoto/Ujjwal.jpg') }}" class="img-fluid" alt=""> --}}
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>

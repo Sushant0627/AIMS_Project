@@ -4,8 +4,11 @@
 
 @section('content')
 <div class="container">
-    <h1>Add Crop Data</h1>
-    <form action="{{ route('crop.store') }}" method="post">
+    <div class="border-bottom p-2">
+        <h1>Add Crop Data</h1>
+    </div>
+
+    <form action="{{ route('crop.store') }}" method="post" class="mt-3">
         @csrf
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingInput" placeholder="Crop Name" name="crop">
@@ -68,6 +71,12 @@
                 {{ $message }} <br>
             @enderror
         </div>
+
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
 
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>

@@ -69,6 +69,12 @@
             @enderror
         </div>
 
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
+
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
     </form>
 </div>

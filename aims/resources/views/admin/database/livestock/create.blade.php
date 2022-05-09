@@ -5,9 +5,11 @@
 @section('content')
 
 <div class="container">
-    <h1>Add a Livestock Data</h1>
+    <div class="border-bottom p-2">
+        <h1>Add a Livestock Data</h1>
+    </div>
 
-    <form action="{{ route('livestock.store') }}" method="post">
+    <form action="{{ route('livestock.store') }}" method="post" class="mt-3">
         @csrf
         <div class="form-floating">
             <input class="form-control" type="text" name="name" placeholder="Name" id="floatingInput"><br>
@@ -36,6 +38,11 @@
             @enderror
         </div>
 
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
+            {{ $message }} <br>
+        @enderror
 
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>

@@ -1,12 +1,15 @@
-@extends('layouts/databaseLayout')
+@extends('layouts/dashboardLayout')
 
 @section('title', 'Farmers')
 
 @section('content')
 <div class="container">
-    <h1>Farmer's Data</h1>
-    <div>
-        <table class="table table-striped">
+    <div class="border-bottom">
+        <h1>Farmer's Data</h1>
+    </div>
+
+    <div class="mt-3">
+        <table class="table table-striped table-hover table-sm">
             <thead>
                 <td>SN</td>
                 <td>First Name</td>
@@ -18,6 +21,7 @@
                 <td>Address</td>
                 <td>Province</td>
                 <td>State</td>
+                <td>Images</td>
                 <td>Operations</td>
             </thead>
             <tbody>
@@ -32,15 +36,17 @@
                     <td>{{ $data['address'] }}</td>
                     <td>{{ $data['province'] }}</td>
                     <td>{{ $data['state'] }}</td>
+                    <td><img src="{{asset("images/seed/".$data['imgName'])}}" height="160px" width="160px"></td>
                     <td>
-                        <a href="{{ 'fEdit/'.$data['id'] }}">Edit</a> |
-                        <a href="{{ 'fDelete/'.$data['id'] }}">Delete</a>
+                        <a href="{{ 'fEdit/'.$data['id'] }}">Edit</a> | <a href="{{ 'fDelete/'.$data['id'] }}">Delete</a>
                     </td>
                 @endforeach
             </tbody>
         </table>
     </div>
 
+    <a class="btn btn-success btn-lg btn-block" href="farmerExcel">Excel Sheet</a>
+    <a class="btn btn-success btn-lg btn-block" href="farmerPDF">PDF</a>
     <a class="btn btn-success btn-lg btn-block" href="{{ route('farmer.create') }}">Add</a>
     <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
 </div>

@@ -92,6 +92,14 @@
             @enderror
         </div>
 
+        <div class="form-label mb-3">
+            <label for="picture">Picture</label>
+            <input class="form-control" type="file" value="{{ $data['imgName'] }}" name="picture" id="picture">
+        </div>
+        @error('picture')
+            {{ $message }} <br>
+        @enderror
+
         <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>
         <a class="btn btn-success btn-lg btn-block" href="javascript:history.back()">Back</a>
     </form>

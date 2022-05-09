@@ -21,9 +21,9 @@
             {{ $message }} <br>
         @enderror
 
-        <label for="picture">Picture: </label>
-        <input type="file" name="picture" id="picture" class="form-control"><br>
-        @error('picture')
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
             {{ $message }} <br>
         @enderror
 

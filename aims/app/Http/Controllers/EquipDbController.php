@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EquipmentExport;
 use App\Models\equipment_data;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class EquipDbController extends Controller
 {
@@ -62,11 +64,14 @@ class EquipDbController extends Controller
         if($query){
             return redirect()->route('equipment.create')->with('failed', 'Equipment Already In Database');
         } else {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/equipment'), $imageName);
 
             $sData = new equipment_data();
 
             $sData->name = $request->name;
             $sData->mrp = $request->mrp;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
@@ -110,11 +115,14 @@ class EquipDbController extends Controller
         if($query){
             return back()->with('failed', 'Equipment Already In Database');
         } else {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/equipment'), $imageName);
 
             $sData = equipment_data::find($id);
 
             $sData->name = $data->name;
             $sData->mrp = $data->mrp;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
@@ -136,5 +144,22 @@ class EquipDbController extends Controller
         $data->delete();
 
         return redirect()->route('equipment.index')->with('success', 'Equipment Deleted From Database');
+    }
+
+    // Generate PDF
+    public function createPDF() {
+        // retreive all records from db
+        $datas = equipment_data::all()->toArray();
+
+        // share data to view
+        view()->share('crop',$datas);
+        $pdf = PDF::loadView('admin/database/crop/index', compact('datas'));
+
+        // download PDF file with download method
+        return $pdf->download('equipment_data.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new EquipmentExport, 'equipment.xlsx');
     }
 }

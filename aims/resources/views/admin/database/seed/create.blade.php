@@ -4,10 +4,13 @@
 
 @section('content')
 <div class="container">
-    <h1>
-        Add Crop
-    </h1>
-    <form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post">
+    <div class="border-bottom p-2">
+        <h1>
+            Add Crop
+        </h1>
+    </div>
+
+    <form action="{{ route('seed.store') }}" enctype="multipart/form-data"   method="post" class="mt-3">
         @csrf
 
         <div class="row mb-3">
@@ -29,10 +32,10 @@
         </div>
 
         <div class="form-label mb-3">
-            <label for="picture">Picture</label>
-            <input class="form-control" type="file" name="picture" id="picture">
+            <label for="image">Picture</label>
+            <input class="form-control" type="file" name="image" id="image">
         </div>
-        @error('picture')
+        @error('image')
             {{ $message }} <br>
         @enderror
 

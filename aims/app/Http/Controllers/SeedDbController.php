@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use App\Exports\SeedExport;
 use App\Models\seed_data;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class SeedDbController extends Controller
 {
@@ -62,12 +63,14 @@ class SeedDbController extends Controller
         if($query){
             return redirect()->route('seed.create')->with('failed', 'Seed Already In Database');
         } else {
-
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/seed'), $imageName);
 
             $sData = new seed_data();
 
             $sData->name = $data->name;
             $sData->growth = $data->growth;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
@@ -122,18 +125,20 @@ class SeedDbController extends Controller
         if($query){
             return back()->with('failed', 'Seed Already In Database');
         } else {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/seed'), $imageName);
 
             $sData = seed_data::find($id);
 
             $sData->name = $data->name;
             $sData->growth = $data->growth;
+            $sData->imgName = $imageName;
 
             $sData->save();
 
             return redirect()->route('seed.index')->with('success', 'Seed Updated In Database');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -148,5 +153,22 @@ class SeedDbController extends Controller
         $data->delete();
 
         return redirect()->route('seed.index')->with('success', 'Record Deleted From Database');
+    }
+
+    // Generate PDF
+    public function createPDF() {
+        // retreive all records from db
+        $datas = seed_data::all()->toArray();
+
+        // share data to view
+        view()->share('crop',$datas);
+        $pdf = PDF::loadView('admin/database/crop/index', compact('datas'));
+
+        // download PDF file with download method
+        return $pdf->download('seed_data.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new SeedExport, 'seed.xlsx');
     }
 }

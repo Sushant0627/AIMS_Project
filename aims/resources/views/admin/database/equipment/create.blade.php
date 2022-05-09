@@ -4,8 +4,11 @@
 
 @section('content')
 <div class="container">
-    <h1>Add Equipment Data</h1>
-    <form action="{{ route('equipment.store') }}" method="post">
+    <div class="border-bottom p-2">
+        <h1>Add Equipment Data</h1>
+    </div>
+
+    <form action="{{ route('equipment.store') }}" method="post" class="mt-3">
         @csrf
         <div class="form-floating">
             <input class="form-control" type="text" name="name" placeholder="Name" id="floatingInput"><br>
@@ -20,6 +23,12 @@
             <label for="floatingInput">Market Rate Price</label>
         </div>
         @error('mrp')
+            {{ $message }} <br>
+        @enderror
+
+        <label for="image">Picture: </label>
+        <input type="file" name="image" id="image" class="form-control"><br>
+        @error('image')
             {{ $message }} <br>
         @enderror
 

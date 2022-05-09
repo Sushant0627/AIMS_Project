@@ -4,9 +4,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mt-3 border-bottom">
     <h1>Seed Database</h1>
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <td>ID</td>
@@ -21,17 +21,19 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data['name'] }}</td>
                 <td>{{ $data['growth'] }}</td>
-                <td><img src="{{asset($data['imgName'])}}(WIP)"></td>
+                <td><img src="{{asset("images/seed/".$data['imgName'])}}" height="160px" width="160px"></td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    @if(session('user') == 'normal')
-        <div class="clearfix">
+    <div class="clearfix mb-3">
+        <a class="btn btn-success btn-lg btn-block" href="seedExcel">Excel Sheet</a>
+        <a class="btn btn-success btn-lg btn-block" href="seedPDF">PDF</a>
+        @if(session('user') == 'normal')
             <a class="btn btn-success btn-lg float-right" href="{{ route('seed.create') }}">Add Seed</a>
-        </div>
-    @endif
+        @endif
+    </div>
 </div>
 
 @endsection

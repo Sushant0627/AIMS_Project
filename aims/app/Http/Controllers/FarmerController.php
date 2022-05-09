@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FarmerExport;
 use App\Models\farmers;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class FarmerController extends Controller
 {
@@ -56,6 +59,8 @@ class FarmerController extends Controller
             'province' => strip_tags($request['province']),
             'state' => strip_tags($request['state']),
         ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images/farmer'), $imageName);
 
         $sData = new farmers();
 
@@ -68,6 +73,7 @@ class FarmerController extends Controller
         $sData->address = $data->address;
         $sData->province = $data->province;
         $sData->state = $data->state;
+        $sData->imgName = $imageName;
 
         $sData->save();
 
@@ -116,6 +122,9 @@ class FarmerController extends Controller
             'state' => strip_tags($request['state']),
         ]);
 
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images/farmer'), $imageName);
+
         $sData = farmers::find($id);
 
         $sData->fname = $data->fname;
@@ -127,6 +136,7 @@ class FarmerController extends Controller
         $sData->address = $data->address;
         $sData->province = $data->province;
         $sData->state = $data->state;
+        $sData->imgName = $imageName;
 
         $sData->save();
 
@@ -146,5 +156,22 @@ class FarmerController extends Controller
         $data->delete();
 
         return redirect()->route('farmer.index')->with('success', 'Record Deleted From Database');
+    }
+
+    // Generate PDF
+    public function createPDF() {
+        // retreive all records from db
+        $datas = farmers::all()->toArray();
+
+        // share data to view
+        view()->share('crop',$datas);
+        $pdf = PDF::loadView('admin/database/crop/index', compact('datas'));
+
+        // download PDF file with download method
+        return $pdf->download('farmer_data.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new FarmerExport, 'farmers.xlsx');
     }
 }
